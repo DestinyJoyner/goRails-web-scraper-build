@@ -12,5 +12,8 @@
 
 <h4>Results</h4>
 <% @page.results.order(created_at: :desc).each do |result| %>
-  <p><%= result.success ? "Success" : "Failure" %></p>
+  <p>
+    <%= result.success ? "Success" : "Failure" %> - 
+    <%= result.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+  </p>
 <% end %>

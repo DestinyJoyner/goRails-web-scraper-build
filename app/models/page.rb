@@ -2,7 +2,7 @@ class Page < ApplicationRecord
   has_many :results
   
   validates :url, presence: true
-  validates :check_type, presence: true
+  # validates :check_type, presence: true
   validates :selector, presence: true
   # Remove or comment out this line since we're not using match_text anymore
   # validates :match_text, presence: {if: -> { check_type == "text" }}
