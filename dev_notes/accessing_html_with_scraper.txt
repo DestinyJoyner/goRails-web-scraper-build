@@ -1,0 +1,22 @@
+rails c
+response = Scraper.text("<url name>")
+response.include?("YANKEES")
+document = Nokogiri::HTML(response)
+document.at_css("[]")
+
+
+- for accessing button to see if "add to cart" or "sold out":
+button = document.at_css("#AddToCart--product-template")
+button_text = button.text.strip
+button_text.include?("Add to Cart")  # returns true if in stock
+# or
+button_text.include?("Sold Out")     # returns true if sold out
+
+button html
+<button type="submit" name="add" id="AddToCart--product-template" class="btn btn--primary btn--add-to-cart full btn--addtocart_animation">
+                      <span class="btn__text">
+                        <span class="material-icons-outlined button-cart-icon">local_mall</span>
+                        <span class="btn__add-to-cart-text">Add to Cart</span>
+                      </span>
+                    </button>
+using built in Nokogiri -> look up details/ what it does?
