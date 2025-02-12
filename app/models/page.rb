@@ -4,16 +4,20 @@ class Page < ApplicationRecord
   validates :url, presence: true
   validates :check_type, presence: true
   validates :selector, presence: true
-  validates :match_text, presence: {if: -> { check_type == "text" }}
+  # Remove or comment out this line since we're not using match_text anymore
+  # validates :match_text, presence: {if: -> { check_type == "text" }}
 
   def run_check
     scraper = Scraper.new(url)
-    result = if check_type == "text"
-      scraper.text(selector:).downcase == match_text.downcase
+    check_result = if check_type == "text"
+      # Check if the Add to Cart button exists and is not disabled
+      button = scraper.document.at_css("#AddToCart--product-template")
+      button.present? && !button["disabled"]
     else
-      scraper.present?(selector:)
+      scraper.present?(selector: selector)
     end
     
-    result.create(success: result)
+    # Create a new Result record associated with this page
+    results.create(success: check_result)
   end
 end

@@ -8,7 +8,7 @@ class Scraper
 
   # Initialize is called when we create a new instance with Scraper.new(url)
   def initialize(url)
-    response = Net::HTTP.get(uri)     # Fetches the HTML content
+    response = Net::HTTP.get(URI(url))     # Fetches the HTML content
     @document = Nokogiri::HTML(response) # Stores the parsed HTML as an instance variable
   end
 

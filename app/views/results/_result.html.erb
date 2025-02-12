@@ -1,0 +1,8 @@
+<%= tag.div id: dom_id(result, :success) do %>
+  <div>
+    <%= result.success ? "Success" : "Failure" %>
+  </div>
+  <div>
+    <%= result.created_at %>
+  </div>
+<% end %>
